@@ -1,34 +1,48 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link, Outlet } from 'react-router-dom';
+import shelterApi from './api';
 import './ShelterPetsPage.scss';
-import Button from '../../ui/Button/Button';
-import ShelterPetsType from '../../modules/ShelterPetsType/ShelterPetsType';
+import MainContainer from '../../components/MainContainer/MainContainer';
+import LeftArrowIcon from '../../images/LeftArrowIcon/LeftArrowIcon';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 const ShelterPetsPage = () => {
-  const { shelter } = useOutletContext();
+  const { id } = useParams();
+  const currentUser = useContext(CurrentUserContext);
+  const isOwner = currentUser?.own_shelter?.id === Number(id);
+  const [shelter, setShelter] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [countPets, setCountPets] = useState(0);
+
+  useEffect(() => {
+    shelterApi
+      .getShelterById(id) // загрузка инфо о приюте
+      .then((res) => {
+        setIsLoading(false);
+        setShelter(res);
+        setCountPets(res.count_pets);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }, []);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
-    <div className='shelter-pets'>
-      <div className='shelter-pets__header'>
-        <h1 className='shelter-pets__title'>Питомцы приюта {shelter.name}</h1>
-        <p className='shelter-pets__all-pets'>Всего питомцев: <span>{shelter.count_pets}</span></p>
-        <Button className='shelter-pets__add-pets-button'>Добавить питомца</Button>
-      </div>
-      {shelter.animal_types && shelter.animal_types.length ? (
-        <>
-          {shelter.animal_types.map((type) => {
-            return (
-              <ShelterPetsType type={type} key={type} />
-            );
-          })}
-          <Button className='shelter-pets__load-more-button' theme='transparent'>
-            Загрузить ещё
-          </Button>
-        </>
-      ) : (
-        <p className='standard-font_type_body'>На данный момент в приюте животных нет</p>
-      )}
-    </div>
+    <MainContainer>
+      <main className='main'>
+        <section className='shelter-pets'>
+          <Link to={-1} className='shelter-pets__back-profile-button'>
+            <LeftArrowIcon />
+            <span>Вернуться назад</span>
+          </Link>
+          <Outlet context={{ shelter, isOwner, isLoading, countPets, setCountPets }} />
+        </section>
+      </main>
+    </MainContainer>
   );
 };
 

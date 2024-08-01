@@ -6,39 +6,26 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-}
 
-.shelter-pets__header {
-  position: relative;
-  margin-bottom: 44px;
-}
-
-.shelter-pets__title {
-  margin: 0;
-  margin-bottom: 16px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 49px;
-}
-
-.shelter-pets__all-pets {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 30px;
-  margin: 0;
-
-  span {
-    color: var(--color-accent-base);
+  section {
+    padding: 0;
   }
 }
 
-.shelter-pets__add-pets-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+.shelter-pets__back-profile-button {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 44px 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 
-.shelter-pets__load-more-button {
-  align-self: center;
-  margin-top: 40px;
+
+  span {
+    margin-left: 16px;
+    color: var(--color-accent-base);
+  }
 }

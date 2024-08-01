@@ -40,6 +40,7 @@ import MyShelterEdit from '../../modules/MySheelterEdit/MyShelterEdit';
 import AddNewsPage from '../AddNewsPage/AddNewsPage';
 import ConfirmPopup from '../../components/ConfirmPopup/ConfirmPopup';
 import ShelterPetsPage from '../ShelterPetsPage/ShelterPetsPage';
+import ShelterAllPets from '../../modules/shelterAllPets/ShelterAllPets';
 
 const App = () => {
   const navigate = useNavigate();
@@ -223,12 +224,15 @@ const App = () => {
             <Route path='/profile/my-shelter' element={<ProtectedRoute condition={loggedIn} component={MyShelterPage} />}>
               <Route index element={<ProtectedRoute condition={loggedIn} component={shelterModules.AboutShelter} />} />
               <Route path='edit' element={<ProtectedRoute condition={loggedIn} component={MyShelterEdit} />} />
-              <Route path=':id/all-pets' element={<ProtectedRoute condition={loggedIn} component={ShelterPetsPage} />} />
-              <Route path=':id/pets/:petId' element={<ProtectedRoute condition={loggedIn} component={shelterModules.PetModule} />} />
             </Route>
             <Route path='/profile/edit' element={<ProtectedRoute condition={loggedIn} component={EditProfilePage} onUpdateCurrentUser={setCurrentUser} />} />
             <Route path='/profile/sign-out' element={<ProtectedRoute condition={loggedIn} component={SignOutPage} onSignOut={handleSignOut} />} />
             <Route path='/profile/edit/password' element={<ProtectedRoute condition={loggedIn} component={ChangePasswordPage} />} />
+            <Route path='/my-shelter/:id' element={<ProtectedRoute condition={loggedIn} component={ShelterPetsPage} />}>
+              <Route path='all-pets' element={<ProtectedRoute condition={loggedIn} component={ShelterAllPets} />} />
+              <Route path='pets/:petId' element={<ProtectedRoute condition={loggedIn} component={shelterModules.PetModule} />} />
+            </Route>
+
 
             <Route path='*' element={<NotFoundPage />} />
           </Routes>

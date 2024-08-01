@@ -17,18 +17,13 @@ const MyShelterPage = () => {
   const contentText = {
     GO_TO_BACK: 'Вернуться назад',
     BACK_TO_PROFILE: 'Вернуться в Личный Кабинет',
-    GO_TO_SHELTER: 'Вернуться к приюту'
   };
 
   let linkTo;
   let linkText;
-  if (location.pathname.includes('edit') || location.pathname.includes('pets')) {
+  if (location.pathname.includes('edit')) {
     linkTo = -1;
     linkText = contentText.GO_TO_BACK;
-  }
-  else if(location.pathname.includes('all-pets')) {
-    linkTo = -1;
-    linkText = contentText.GO_TO_SHELTER;
   } else {
     linkTo = '/profile';
     linkText = contentText.BACK_TO_PROFILE;

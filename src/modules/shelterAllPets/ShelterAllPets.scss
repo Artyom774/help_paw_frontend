@@ -1,0 +1,30 @@
+.shelter-all-pets__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 19px;
+}
+
+.shelter-all-pets__title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 49px;
+}
+
+.shelter-all-pets__count-pets {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0;
+  margin-bottom: 44px;
+
+  span {
+    color: var(--color-accent-base);
+  }
+}
+
+.shelter-all-pets__load-more-button {
+  align-self: center;
+  margin-top: 40px;
+}

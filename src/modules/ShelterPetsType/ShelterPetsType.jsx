@@ -11,7 +11,7 @@ const ShelterPetsType = ({ type }) => {
   const [pets, setPets] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-  const [checkedId, setCheckedId] = useState([]);
+  const [checkedPets, setCheckedPets] = useState([]);
 
   useEffect(() => {
     shelterPetsApi
@@ -46,41 +46,53 @@ const ShelterPetsType = ({ type }) => {
   };
   const handleButtonCancelSelectedClick = () => {
     setIsSelected(false);
-    setCheckedId([]);
+    setCheckedPets([]);
   };
   const handleButtonSelectedAllClick = () => {
     setIsSelected(true);
     setIsChecked(true);
-    setCheckedId((items) => {
+    setCheckedPets((items) => {
       return [...items, ...pets];
     });
   };
   const handleButtonCancelSelectedAllClick = () => {
     setIsSelected(false);
     setIsChecked(false);
-    setCheckedId([]);
+    setCheckedPets([]);
   };
   const handleChangePet = (pet) => {
-    if (!checkedId.includes(pet)) {
-      setCheckedId((items) => {
+    if (!checkedPets.includes(pet)) {
+      setCheckedPets((items) => {
         return [...items, pet];
       });
     } else {
-      setCheckedId (
-        checkedId.filter((petsId) => {
-          return !(petsId === pet);
+      setCheckedPets (
+        checkedPets.filter((checkedPet) => {
+          return !(checkedPet === pet);
         })
       );
-    }
+    };
   };
+
+  // const handleButtonDeletedClick = () => {
+  //   checkedPets.forEach((checkedPet) => {
+  //     pets.filter((pet) => {
+  //       return pet === checkedPet;
+  //     });
+  //   });
+  // };
+
 
   return (
     <div className='shelter-pets-type'>
       <div className='shelter-pets-type__header'>
         <h2 className='shelter-pets-type__title'>{petType}</h2>
         <div className='shelter-pets-type__controls'>
-          {checkedId.length !== 0 ? (
-            <Button theme='tertiary' className='shelter-pets-type__btn-deleted'>
+          {checkedPets.length !== 0 ? (
+            <Button theme='tertiary'
+              className='shelter-pets-type__btn-deleted'
+              // onClick={handleButtonDeletedClick}
+            >
               <DeleteIcon />
               Удалить
             </Button>
@@ -129,7 +141,7 @@ const ShelterPetsType = ({ type }) => {
       {pets.length !== 0 ? (
         <ul className='shelter-pets-type__list'>
           {pets.map((pet) => {
-            const isCheckedPet = checkedId.includes(pet);
+            const isCheckedPet = checkedPets.includes(pet);
             const className = `${isSelected ? 'shelter-pets-type__input_selected' : ''} ${isCheckedPet ? 'shelter-pets-type__input_checked' : ''}`;
             return (
               <li className='shelter-pets-type__list-item' key={pet.id}>
@@ -141,7 +153,7 @@ const ShelterPetsType = ({ type }) => {
                   }}
                 />
                 <PetCard
-                  link={!isSelected ? `../${id}/pets/${pet.id}` : ''}
+                  link={!isSelected ? `/my-shelter/${id}/pets/${pet.id}` : ''}
                   id={pet.id}
                   name={pet.name}
                   age={pet.age}
