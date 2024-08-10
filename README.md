@@ -65,8 +65,5 @@
 ```
   npm run start
 ```
-## 🦸‍♂️🦸 Authors
 
-- [Артём Волошин](https://github.com/Artyom774)
-- [Влада Мельникова](https://github.com/bevuxyna)
 
