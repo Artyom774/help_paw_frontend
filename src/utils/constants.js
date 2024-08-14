@@ -1,4 +1,4 @@
-export const baseUrl = process.env.REACT_APP_SERVER_TYPE === 'prod' ? 'https://lapkipomoshi.ru/api' : 'http://194.58.109.129/api';
+export const baseUrl = process.env.REACT_APP_SERVER_TYPE === 'prod' ? 'https://lapkipomoshi.ru/api' : 'http://194.67.118.153/api';
 export const apiHeaders = {
   'Content-Type': 'application/json',
 };
