@@ -32,13 +32,9 @@ const Header = () => {
       <header className='header'>
         <BurgerMenu />
 
-        {isScreenWide ? (
-          <Link to='/'>
-            <Paw className='header__logo' />
-          </Link>
-        ) : (
+        <Link to='/'>
           <Paw className='header__logo' />
-        )}
+        </Link>
 
         <nav className={`menu menu_items_links ${isElementHidden}`}>
           <MenuLink url='/papers'>Полезные статьи</MenuLink>
